@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smass"
+version = "0.1.0"
+description = "scan my assets: a local secure-coding validation suite"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "nedlir" }]
+readme = "README.md"
+dependencies = [
+    "langchain-anthropic>=0.3",
+    "langchain-core>=0.3",
+    "mcp>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/nedlir/smass"
+
+[project.optional-dependencies]
+# Needed only when SMASS_LLM_API=openai (OpenAI-compatible endpoint).
+openai = ["langchain-openai>=0.2"]
+dev = ["pytest>=8.0"]
+# `smass --airflow` itself needs nothing extra (stdlib REST client). This extra is
+# for the Airflow environment that runs dags/smass_scan.py; install it with the
+# official constraints file (see scripts/airflow-standalone.sh).
+airflow = ["apache-airflow>=3.3,<4"]
+
+[project.scripts]
+smass = "smass.cli:run"
+
+[tool.setuptools.packages.find]
+include = ["smass*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

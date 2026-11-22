@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+.venv-airflow/
+venv/
+*.egg-info/
+build/
+dist/
+
+# smass run output
+.smass/
